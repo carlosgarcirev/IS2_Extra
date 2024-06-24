@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ReleCloud - Destinations
+{% endblock %}
+
+{% block content %}
+<h1>ReleCloud Destinations</h1>
+
+<ul class="list-group">
+    {% for destination in destinations %}
+    <a class="list-group-item list-group-action" href="{% url 'destination-detail' destination.id %}">
+        {{ destination }}
+    </a>
+    {% endfor %}
+</ul>
+{% endblock %}
