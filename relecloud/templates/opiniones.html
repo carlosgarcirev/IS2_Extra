@@ -5,6 +5,39 @@ ReleCloud - Opinions
 {% endblock %}
 
 {% block content %}
+<h1>Opiniones por crucero</h1>
+
+{% comment %} <form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="title">Título:</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+    <div>
+        <label for="opinion_text">Opinión:</label>
+        <textarea id="opinion_text" name="opinion_text" rows="4" required></textarea>
+    </div>
+    <div>
+        <label for="cruise_id">Crucero:</label>
+        <select id="cruise_id" name="cruise_id" required>
+            {% for cruise in cruises %}
+            <option value="{{ cruise.id }}">{{ cruise.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit">Enviar Opinión</button>
+</form> {% endcomment %}
+
+<ul class="list-group">
+    {% for cruise in cruises %}
+    <a class="list-group-item list-group-item-action" href="{% url 'cruise_detail' cruise.id %}">{{ cruise.name }}</a>
+    
+        {% for opinion in cruise.opinions.all %}
+        <li>{{ opinion.title }}: {{ opinion.opinion_text }} ({{ opinion.created_at }})</li>
+        {% endfor %}
+    
+    {% endfor %}
+</ul>
 
 
 {% endblock content %}
