@@ -17,6 +17,19 @@ def destinations(request):
     all_destinations = models.Destination.objects.all()
     return render(request, 'destinations.html', { 'destinations': all_destinations})
 
+def opiniones(request):
+    if request.method == "POST":
+        title = request.POST.get("title")
+        opinion_text = request.POST.get("opinion_text")
+        cruise_id = request.POST.get("cruise_id")
+        if title and opinion_text and cruise_id:
+            cruise = Cruise.objects.get(id=cruise_id)
+            Opinion.objects.create(title=title, opinion_text=opinion_text, cruise=cruise)
+            return redirect('opiniones')
+    
+    cruises = Cruise.objects.all().prefetch_related('opinions')
+    return render(request, 'opiniones.html', {'cruises': cruises})
+
 
 class DestinationDetailView(generic.DetailView):
     template_name = 'destination_detail.html'
