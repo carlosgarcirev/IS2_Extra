@@ -1,0 +1,9 @@
+python-dotenv
+django 
+django-crispy-forms
+whitenoise
+psycopg2-binary
+django-bootstrap4
+crispy-bootstrap4
+django-js-lib-bootstrap5
+pillow
