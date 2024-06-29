@@ -9,9 +9,10 @@ ReleCloud - Destinations
 
 <ul class="list-group">
     {% for destination in destinations %}
-    <a class="list-group-item list-group-action" href="{% url 'destination-detail' destination.id %}">
-        {{ destination }}
-    </a>
+        <a class="list-group-item list-group-item-action" href="{% url 'destination_detail' destination.id %}">
+            {{ destination }}
+        </a>
+        <img src="{{ destination.image.url }}" alt="{{ destination.name }}" style="width: 30px; height: 30px;">
     {% endfor %}
-</ul>
+    </ul>
 {% endblock %}
