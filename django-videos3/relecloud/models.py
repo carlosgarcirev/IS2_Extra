@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Destination(models.Model):
@@ -14,8 +15,16 @@ class Destination(models.Model):
         blank=False
     )
     slug = models.SlugField()
+
+    image = models.ImageField(
+        upload_to='images/',
+        default='images/imagenDefault.jpg')
+    
     def __str__(self) -> str:
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('destination_detail', kwargs={"pk": self.pk})
     
 class Cruise(models.Model):
     name = models.CharField(
