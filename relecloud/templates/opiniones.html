@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}
 ReleCloud - Opinions
 {% endblock %}
@@ -7,34 +9,49 @@ ReleCloud - Opinions
 {% block content %}
 <h1>Opiniones por crucero</h1>
 
-{% comment %} <form method="post">
+<form method="post">
     {% csrf_token %}
-    <div>
+    {{ form|crispy }}
+
+    <div class="form-group">
         <label for="title">Título:</label>
-        <input type="text" id="title" name="title" required>
+        <input type="text" id="title" name="title" class="form-control" required>
     </div>
-    <div>
+
+    <div class="form-group">
         <label for="opinion_text">Opinión:</label>
-        <textarea id="opinion_text" name="opinion_text" rows="4" required></textarea>
+        <textarea id="opinion_text" name="opinion_text" rows="4" class="form-control" required></textarea>
     </div>
-    <div>
+
+    <div class="form-group">
         <label for="cruise_id">Crucero:</label>
-        <select id="cruise_id" name="cruise_id" required>
+        <select id="cruise_id" name="cruise_id" class="form-control" required>
             {% for cruise in cruises %}
-            <option value="{{ cruise.id }}">{{ cruise.name }}</option>
+                <option value="{{ cruise.id }}">{{ cruise.name }}</option>
             {% endfor %}
         </select>
     </div>
-    <button type="submit">Enviar Opinión</button>
-</form> {% endcomment %}
+
+    <button type="submit" class="btn btn-primary">Enviar Opinión</button>
+</form>
+
 
 <ul class="list-group">
     {% for cruise in cruises %}
-    <a class="list-group-item list-group-item-action" href="{% url 'cruise_detail' cruise.id %}">{{ cruise.name }}</a>
+    <a class="list-group-item list-group-item-action"href="{% url 'cruise_detail' cruise.id %}">{{ cruise.name }}</a>
     
+    <ul>
         {% for opinion in cruise.opinions.all %}
-        <li>{{ opinion.title }}: {{ opinion.opinion_text }} ({{ opinion.created_at }})</li>
+            <br>
+            <li>
+                <strong>{{ opinion.title }}:</strong> 
+                {{ opinion.opinion_text }} 
+                <em>({{ opinion.created_at }})</em>
+            </li>
+            <br>
         {% endfor %}
+    </ul>
+    
     
     {% endfor %}
 </ul>
