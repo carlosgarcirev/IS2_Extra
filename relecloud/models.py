@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Destination(models.Model):
@@ -13,9 +14,10 @@ class Destination(models.Model):
         null=False,
         blank=False
     )
-    def __str__(self):
+    slug = models.SlugField()
+    def __str__(self) -> str:
         return self.name
-
+    
 class Cruise(models.Model):
     name = models.CharField(
         unique=True,
