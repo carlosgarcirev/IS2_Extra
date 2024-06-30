@@ -10,5 +10,5 @@ urlpatterns = [
     path('destination/<int:pk>', views.DestinationsDetailView.as_view(), name='destination-detail'),
     path('cruise/<int:pk>', views.CruisesDetailView.as_view(), name='cruise-detail'),
     path('info-request/', views.InfoRequestCreate.as_view(), name='info-request'),
-    
+    path('info_request_success/', views.info_request_success, name='info_request_success'),
 ]
