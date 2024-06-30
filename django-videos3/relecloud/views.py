@@ -4,6 +4,30 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 
+# views.py
+from django.core.mail import send_mail
+from django.conf import settings
+from django.shortcuts import render, redirect
+from .forms import InfoRequestForm
+
+def info_request(request):
+    if request.method == 'POST':
+        form = InfoRequestForm(request.POST)
+        if form.is_valid():
+            form.save()
+            send_mail(
+                'Solicitud de Información Recibida',
+                'Hemos recibido su solicitud de información.',
+                settings.EMAIL_HOST_USER,
+                [form.cleaned_data['email']],
+                fail_silently=False,
+            )
+            return redirect('info_request_success')
+    else:
+        form = InfoRequestForm()
+    return render(request, 'info_request.html', {'form': form})
+
+
 # Create your views here.
 #def index(request):
 #    return HttpResponse('Hello, World!')
