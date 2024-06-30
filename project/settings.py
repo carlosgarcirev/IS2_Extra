@@ -153,3 +153,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'  # O 'bootstrap3' dependiendo de tu versión
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_SOTARAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Reemplaza con tu proveedor SMTP
+EMAIL_PORT = 587  # O el puerto correspondiente
+EMAIL_USE_TLS = True  # O False si no es necesario
+EMAIL_HOST_USER = 'tu_email@gmail.com'
+EMAIL_HOST_PASSWORD = 'tu_contraseña'
