@@ -27,6 +27,10 @@ def info_request(request):
         form = InfoRequestForm()
     return render(request, 'info_request.html', {'form': form})
 
+# views.py
+def info_request_success(request):
+    return render(request, 'info_request_success.html')
+
 
 # Create your views here.
 #def index(request):
