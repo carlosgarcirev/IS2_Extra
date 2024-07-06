@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load static %}
 
 {% block title %}
 ReleCloud - {{ destination }}
@@ -6,8 +6,12 @@ ReleCloud - {{ destination }}
 
 {% block content %}
 <h1>{{ destination }}</h1>
+
+{% comment %} <img src="{% static 'res/img/' %}{{ destination.name }}.jpg" alt="{{ destination.name }} Photo"
+    class="img-thumbnail" style="width: 200px; height: auto; margin-bottom: 15px;"> {% endcomment %}
+
 <p>
-{{ destination.description }}
+    {{ destination.description }}
 </p>
 <p>You can explore {{ destination }} on the following cruises:</p>
 <ul class="list-group">
@@ -15,4 +19,15 @@ ReleCloud - {{ destination }}
     <a class="list-group-item list-group-item-action" href="{% url 'cruise_detail' cruise.id %}">{{ cruise }}</a>
     {% endfor %}
 </ul>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var astronautImg = $("#astronaut-img");
+        var destinationImgUrl = "{% static 'res/img/' %}{{ destination.name }}.jpg";
+        astronautImg.attr("src", destinationImgUrl);
+        astronautImg.attr("alt", "{{ destination.name }} Photo");
+    });
+</script>
+
 {% endblock content %}

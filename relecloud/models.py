@@ -1,7 +1,10 @@
 from django.db import models
 from django.urls import reverse
+from django.core.mail import send_mail
+from django.conf import settings
+from django.db import models
 
-# Create your models here.
+# models.py
 class Destination(models.Model):
     name = models.CharField(
         unique=True,
@@ -14,15 +17,15 @@ class Destination(models.Model):
         null=False,
         blank=False
     )
-    slug = models.SlugField()
 
     image = models.ImageField(
-        upload_to='images/',
-        default='images/imagenDefault.jpg')
+        upload_to='res/img/',  # Remove 'static/' from here
+        default='images/imagenDefault.jpg'
+    )
     
     def __str__(self) -> str:
         return self.name
-    
+
 class Cruise(models.Model):
     name = models.CharField(
         unique=True,
@@ -59,6 +62,17 @@ class InfoRequest(models.Model):
         on_delete=models.PROTECT
     )
 
+    def __str__(self):
+        return f'{self.name} - {self.email}'
+
+    #def send_notification_email(self):
+        #subject = f'New Information Request: {self.name}'
+        #message = f'Hello,\n\nA new information request has been submitted.\n\nName: {self.name}\nEmail: {self.email}\nNotes: {self.notes}\n\nPlease follow up with the customer regarding Cruise: {self.cruise.name}\n\nBest regards,\nYour Website Team'
+        #from_email = settings.EMAIL_HOST_USER
+        #recipient_list = [self.email]
+        #send_mail(subject, message, from_email, recipient_list)
+        
+
 class Opinion(models.Model):
     title = models.CharField(max_length=200)
     opinion_text = models.TextField()
@@ -71,4 +85,3 @@ class Opinion(models.Model):
 
     def __str__(self):
         return self.title
-

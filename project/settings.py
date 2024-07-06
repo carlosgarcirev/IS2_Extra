@@ -25,12 +25,12 @@ SECRET_KEY = 'django-insecure-f20zljw_vx1k@@g8(4l974yoo#$4_!lkev%ou%t!hy!%+*w#cw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['is2cgr.azurewebsites.net', ".azurewebsites.net", '127.0.0.1']
+ALLOWED_HOSTS = ['p2extrafinal.azurewebsites.net', ".azurewebsites.net", '127.0.0.1']
 
 #Configuración de orígenes confiables para CSRF
 CSRF_TRUSTED_ORIGINS = [
-    "https://spacetour-relecloud.azurewebsites.net/",
-    "http://spacetour-relecloud.azurewebsites.net/",
+    "https://p2extrafinal.azurewebsites.net/",
+    "http://p2extrafinal.azurewebsites.net/",
     "https://.azurewebsites.net/",
     "http://.azurewebsites.net/",
     "http://127.0.0.1/",
@@ -90,19 +90,17 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        "ENGINE": "django.db.backends.sqlite3",
-        "HOST": "127.0.0.1",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "django",
+        "USER": "django",
+        "PASSWORD": "p2extrafinal-db",
+        "HOST": "p2extrafinal-db-db.postgres.database.azure.com",
+        "PORT": "5432",
+        "OPTIONS": {"sslmode": "require"},
+
     }
 }
 
-#"ENGINE": "django.db.backends.postgresql",
- #       "NAME": "django_db",
-  #      "USER": "super@is2cgr",
-   #     "PASSWORD": "Car052013_Gar",
-    #    "HOST": "is2cgr.postgres.database.azure.com",
-     #   "PORT": "5432",
-      #  "OPTIONS": {"sslmode": "require"},
 
 
 # Password validation
@@ -141,7 +139,12 @@ USE_L10N = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'relecloud/static')]
+
+# Media files (Uploaded by users)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -149,15 +152,15 @@ STATIC_URL = 'static/'
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'  # O 'bootstrap3' dependiendo de tu versión de Bootstrap
 CRISPY_TEMPLATE_PACK = 'bootstrap4'  # O 'bootstrap3' dependiendo de tu versión de Bootstrap
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_SOTARAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# settings.py
+# Configuración de envío de correos
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Reemplaza con tu proveedor SMTP
 EMAIL_PORT = 587  # O el puerto correspondiente
 EMAIL_USE_TLS = True  # O False si no es necesario
 EMAIL_HOST_USER = 'tu_email@gmail.com'
 EMAIL_HOST_PASSWORD = 'tu_contraseña'
+

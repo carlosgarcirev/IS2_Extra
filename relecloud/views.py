@@ -5,34 +5,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
 from .models import Opinion, Cruise
 from django.http import HttpResponse
-
-# views.py
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 from django.conf import settings
-from django.shortcuts import render, redirect
-from .forms import InfoRequestForm
-
-def info_request(request):
-    if request.method == 'POST':
-        form = InfoRequestForm(request.POST)
-        if form.is_valid():
-            form.save()
-            send_mail(
-                'Solicitud de Información Recibida',
-                'Hemos recibido su solicitud de información.',
-                settings.EMAIL_HOST_USER,
-                [form.cleaned_data['email']],
-                fail_silently=False,
-            )
-            return redirect('info_request_success')
-    else:
-        form = InfoRequestForm()
-    return render(request, 'info_request.html', {'form': form})
-
-# views.py
-def info_request_success(request):
-    return render(request, 'info_request_success.html')
-
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -58,6 +34,34 @@ def opiniones(request):
     cruises = Cruise.objects.all().prefetch_related('opinions')
     return render(request, 'opiniones.html', {'cruises': cruises})
 
+from django.core.mail import send_mail
+from django.conf import settings
+from django.shortcuts import render, redirect
+#from .forms import InfoRequestForm
+
+#def info_request(request):
+#    if request.method == 'POST':
+#        form = InfoRequestForm(request.POST)
+#        if form.is_valid():
+#            form.save()
+#            send_mail(
+#                'Solicitud de Información Recibida',
+#                'Hemos recibido su solicitud de información.',
+#                settings.EMAIL_HOST_USER,
+#                [form.cleaned_data['email']],
+#                fail_silently=False,
+#            )
+#            return redirect('info_request_success')
+#    else:
+#        form = InfoRequestForm()
+#    return render(request, 'info_request.html', {'form': form})
+
+# views.py
+#def info_request_success(request):
+#    return render(request, 'info_request_success.html')
+
+
+        
 
 class DestinationDetailView(generic.DetailView):
     template_name = 'destination_detail.html'
@@ -73,5 +77,9 @@ class InfoRequestCreate(SuccessMessageMixin, generic.CreateView):
     template_name = 'info_request_create.html'
     model = models.InfoRequest
     fields = ['name', 'email', 'cruise', 'notes']
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('info_request_success')
     success_message = 'Thank you, %(name)s! We will email you when we have more information about %(cruise)s!'
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
