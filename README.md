@@ -1,34 +1,16 @@
-# IS2_Extra
+# Parte 1- Añadir la Opción de Opiniones en el Menú
 
-# Grupo8_Relecloud
+En esta parte, se ha añadido una nueva opción en el menú principal para que los usuarios puedan acceder a la página de opiniones sobre los cruceros de Relecloud. Al hacer clic en esta opción, se mostrarán todas las opiniones almacenadas.
 
-Autores del proyecto:
+Pasos Realizados:
 
-	Carlos García Revillas
+	1.- Se ha editado el archivo HTML del menú principal para incluir un nuevo enlace a la página de opiniones.
 
-	Carlos Peraza García
+	2.- Se ha creado una vista que renderiza la página de opiniones.
 
-	Álvaro Salvador López
+ 	3.- Se ha añadido una nueva ruta que apunta a la vista del formulario de opiniones.
 
-	Antonio Serra García de Eulate
+Validación:
 
-Descripción del proyecto:
+	La opción "Opiniones" es visible en el menú principal y lleva a la página de opiniones correctamente.
 
-	Repositorio para la extensión del proyecto Django 'Relecloud' desde Azure DevOps. 
-
-Funcionalidades:
-
-	1.-Añadir una opción adicional al menú en el que se puedan recoger 
-     opiniones sobre los cruceros de Relecloud. Al pinchar sobre dicha 
-     opción se mostrarán las opiniones.
-
-	2.-Modificar la opción anterior para que los que naveguen por 
-     la página puedan añadir una opinión.
-
-	3.-Añadir una fotografía a cada uno de los destinos, de modo que
-     al seleccionar la página "Destinations" muestre junto con la 
-     descripción y los cruceros en los que está incluido el destino.
-
-	4.-Cambiar la forma en la que se interactúa con el usuario desde 
-     el formulario "Info_request" para que el sitio envíe por correo 
-     la notificación de que se ha recibido la solicitud.
