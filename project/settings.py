@@ -35,6 +35,12 @@ CSRF_TRUSTED_ORIGINS = [
     "http://.azurewebsites.net/",
     "http://127.0.0.1/",
     "https://127.0.0.1/",
+    "https://p2extrafinal.azurewebsites.net",
+    "http://p2extrafinal.azurewebsites.net",
+    "https://*.azurewebsites.net",
+    "http://*.azurewebsites.net",
+    "http://127.0.0.1",
+    "https://127.0.0.1",
 ]
 
 # Application definition
