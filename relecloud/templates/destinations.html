@@ -1,20 +1,21 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load static %}
 
 {% block title %}
 ReleCloud - Destinations
 {% endblock %}
 
 {% block content %}
-<h1>Cruise destinations</h1>
-<p>
-If you can imagine it, we travel to it! Below is our list of confirmed destinations.
-</p>
+<h1>ReleCloud Destinations</h1>
+
 <ul class="list-group">
     {% for destination in destinations %}
-        <a class="list-group-item list-group-item-action" href="{% url 'destination_detail' destination.id %}">
-            {{ destination }}
+    <li class="list-group-item">
+        <a class="list-group-item-action" href="{% url 'destination_detail' destination.id %}">
+            <img src="{% static 'res/img/' %}{{ destination.name }}.jpg" alt="{{ destination.name }} Photo"
+                class="img-thumbnail" style="width: 55px; height: 55px; margin-left: 7px;">
+            {{ destination.name }}
         </a>
-        <img src="{{ destination.image.url }}" alt="{{ destination.name }}" style="width: 30px; height: 30px;">
+    </li>
     {% endfor %}
 </ul>
-{% endblock content %}
+{% endblock %}

@@ -32,3 +32,4 @@ Funcionalidades:
 	4.-Cambiar la forma en la que se interactúa con el usuario desde 
      el formulario "Info_request" para que el sitio envíe por correo 
      la notificación de que se ha recibido la solicitud.
+
