@@ -65,12 +65,12 @@ class InfoRequest(models.Model):
     def __str__(self):
         return f'{self.name} - {self.email}'
 
-    #def send_notification_email(self):
-        #subject = f'New Information Request: {self.name}'
-        #message = f'Hello,\n\nA new information request has been submitted.\n\nName: {self.name}\nEmail: {self.email}\nNotes: {self.notes}\n\nPlease follow up with the customer regarding Cruise: {self.cruise.name}\n\nBest regards,\nYour Website Team'
-        #from_email = settings.EMAIL_HOST_USER
-        #recipient_list = [self.email]
-        #send_mail(subject, message, from_email, recipient_list)
+    def send_notification_email(self):
+        subject = f'New Information Request: {self.name}'
+        message = f'Hello,\n\nA new information request has been submitted.\n\nName: {self.name}\nEmail: {self.email}\nNotes: {self.notes}\n\nPlease follow up with the customer regarding Cruise: {self.cruise.name}\n\nBest regards,\nYour Website Team'
+        from_email = settings.EMAIL_HOST_USER
+        recipient_list = [self.email]
+        send_mail(subject, message, from_email, recipient_list)
         
 
 class Opinion(models.Model):

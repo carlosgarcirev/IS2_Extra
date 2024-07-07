@@ -37,28 +37,28 @@ def opiniones(request):
 from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import render, redirect
-#from .forms import InfoRequestForm
+from .forms import InfoRequestForm
 
-#def info_request(request):
-#    if request.method == 'POST':
-#        form = InfoRequestForm(request.POST)
-#        if form.is_valid():
-#            form.save()
-#            send_mail(
-#                'Solicitud de Información Recibida',
-#                'Hemos recibido su solicitud de información.',
-#                settings.EMAIL_HOST_USER,
-#                [form.cleaned_data['email']],
-#                fail_silently=False,
-#            )
-#            return redirect('info_request_success')
-#    else:
-#        form = InfoRequestForm()
-#    return render(request, 'info_request.html', {'form': form})
+def info_request(request):
+    if request.method == 'POST':
+        form = InfoRequestForm(request.POST)
+        if form.is_valid():
+            form.save()
+            send_mail(
+                'Solicitud de Información Recibida',
+                'Hemos recibido su solicitud de información.',
+                settings.EMAIL_HOST_USER,
+                [form.cleaned_data['email']],
+                fail_silently=False,
+            )
+            return redirect('info_request_success')
+    else:
+        form = InfoRequestForm()
+    return render(request, 'info_request.html', {'form': form})
 
-# views.py
-#def info_request_success(request):
-#    return render(request, 'info_request_success.html')
+
+def info_request_success(request):
+    return render(request, 'info_request_success.html')
 
 
         
